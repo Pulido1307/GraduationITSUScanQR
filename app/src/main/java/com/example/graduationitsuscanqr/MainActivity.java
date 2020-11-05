@@ -109,34 +109,10 @@ public class MainActivity extends AppCompatActivity implements Invitado, Message
              buttonCancelar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(alumno.getStatus()<2)
-                    {
-                        alumno.setStatus(alumno.getStatus()+1);
-                        ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Cancelando invitación...", true);
-                        fireStoreHelper.UpdateData(dialog, MainActivity.this, alumno, MainActivity.this);
-                        dialogSearchInvitation.dismiss();
-                    }
-                    else
-                    {
-                        dialogSearchInvitation.dismiss();
-
-                        AlertDialog.Builder  alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-                        alertDialogBuilder.setCancelable(false);
-                        alertDialogBuilder.setTitle("Invitaciones canceladas.");
-                        alertDialogBuilder.setMessage("Los invitados ya están dentro de la ceremonia.");
-                        alertDialogBuilder.setPositiveButton("Aceptar",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface alertDialog, int i)
-                                    {
-                                        alertDialog.cancel();
-                                    }
-                                }
-                        );
-                        alertDialogBuilder.show();
-                        //Snackbar.make(findViewById(android.R.id.content), "Los invitados ya están dentro de la ceremonia.", Snackbar.LENGTH_LONG).show();
-                        //Toast.makeText(MainActivity.this,"Los invitados ya estan dentro de la ceremonia.",Toast.LENGTH_SHORT).show()
-                    }
+                    alumno.setStatus(alumno.getStatus()+1);
+                    ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Cancelando invitación...", true);
+                    fireStoreHelper.UpdateData(dialog, MainActivity.this, alumno, MainActivity.this);
+                    dialogSearchInvitation.dismiss();
                 }
             });
 
@@ -150,7 +126,28 @@ public class MainActivity extends AppCompatActivity implements Invitado, Message
 
     @Override
     public void getAlumno(Alumno alumno) {
-       showCancelInvitation(alumno);
+        if(alumno.getStatus()<2)
+        {
+            showCancelInvitation(alumno);
+        }
+        else
+        {
+            AlertDialog.Builder  alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+            alertDialogBuilder.setCancelable(false);
+            alertDialogBuilder.setTitle("Invitaciones canceladas.");
+            alertDialogBuilder.setMessage("Los invitados ya están dentro de la ceremonia.");
+            alertDialogBuilder.setPositiveButton("Aceptar",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface alertDialog, int i)
+                        {
+                            alertDialog.cancel();
+                        }
+                    }
+            );
+            alertDialogBuilder.show();
+        }
+
     }
 
     @Override
