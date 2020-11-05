@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">GraduationITSUScanQR</string>
-    <string name="imagen_de_codigo_qr">imagen de codigo qr</string>
-    <string name="guardar_invitaci_n">Guardar Invitación</string>
-    <string name="n_mero_de_control">Número de control</string>
-    <string name="graduaci_n_itsu">Graduación ITSU</string>
-    <string name="buscar_invitaci_n">Buscar Invitación</string>
-    <string name="buscar_invitacion">Buscar Invitación</string>
+    <string name="numero_de_control">Número de control:</string>
+    <string name="graduacion_itsu">Graduación ITSU</string>
+    <string name="cancelar_inivitacion">Cancelar Invitación</string>
     <string name="cerrar">Cerrar</string>
+    <string name="nombre">Nombre:</string>
+    <string name="carrera">Carrera:</string>
+    <string name="escanear_qr">Escanear QR</string>
 
 </resources>

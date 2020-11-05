@@ -12,7 +12,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="10dp"
-        android:text="@string/graduaci_n_itsu"
+        android:text="@string/graduacion_itsu"
         android:textColor="#848688"
         android:textSize="24sp" />
 
@@ -24,7 +24,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Número de control:"
+        android:text="@string/numero_de_control"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
@@ -36,7 +36,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Nombre:"
+        android:text="@string/nombre"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
@@ -48,12 +48,12 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Carrera:"
+        android:text="@string/carrera"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/buttonBuscar"
+        android:id="@+id/button_cancelar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -62,7 +62,7 @@
         android:layout_marginBottom="32dp"
         android:insetLeft="10dp"
         android:insetRight="10dp"
-        android:text="@string/buscar_invitacion" />
+        android:text="@string/cancelar_inivitacion" />
 
     <Button
         android:id="@+id/buttonClose"
