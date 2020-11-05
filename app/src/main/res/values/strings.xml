@@ -7,5 +7,6 @@
     <string name="nombre">Nombre:</string>
     <string name="carrera">Carrera:</string>
     <string name="escanear_qr">Escanear QR</string>
+    <string name="grupo">Grupo:</string>
 
 </resources>

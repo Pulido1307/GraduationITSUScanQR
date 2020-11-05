@@ -4,8 +4,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -13,13 +16,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.graduationitsuscanqr.Helpers.CaptureActivityPortrait;
+import com.example.graduationitsuscanqr.Helpers.FireStoreHelper;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Invitado, Messages{
 
     private IntentResult result= null;
     private Button button_scannear;
+    private FireStoreHelper fireStoreHelper = new FireStoreHelper();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,23 +62,22 @@ public class MainActivity extends AppCompatActivity {
         {
             if(result.getContents() != null)
             {
-                Toast.makeText(MainActivity.this,result.getContents(),Toast.LENGTH_SHORT).show();
+                ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Buscando invitación...", true);
                 String values = result.getContents();
-                showCancelInvitation(values);
+                final String array[] = values.split("\\|");
+                fireStoreHelper.getData(array[0], dialog, MainActivity.this, MainActivity.this);
+
             }
             else
             {
-                Toast.makeText(MainActivity.this,"Cancelaste escaneo.",Toast.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(android.R.id.content), "Cancelaste escaneo.", Snackbar.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this,"Cancelaste escaneo.",Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void showCancelInvitation(String values){
-        final String array[] = values.split("\\|");
-        Toast.makeText(MainActivity.this,array.length+""+ array[0],Toast.LENGTH_SHORT).show();
+    private void showCancelInvitation(Alumno alumno){
 
-        if(array.length==3)
-        {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             LayoutInflater inflater = getLayoutInflater();
 
@@ -80,24 +86,52 @@ public class MainActivity extends AppCompatActivity {
 
             final AlertDialog dialogSearchInvitation =builder.create();
             dialogSearchInvitation.setCancelable(false);
-                        Button buttonBuscar = view.findViewById(R.id.button_cancelar);
+            Button buttonCancelar = view.findViewById(R.id.button_cancelar);
             Button buttonClose = view.findViewById(R.id.buttonClose);
 
             TextView textView_Ncontrol = view.findViewById(R.id.textView_Ncontrol);
             TextView textView_Nombre = view.findViewById(R.id.textView_Nombre);
             TextView textView_Carrera = view.findViewById(R.id.textView_Carrera);
+            TextView textView_Grupo = view.findViewById(R.id.textView_Grupo);
 
-            textView_Ncontrol.setText("Número de control: "+array[0]);
-            textView_Nombre.setText("Nombre: "+array[1]);
-            textView_Carrera.setText("Carrera: "+array[2]);
+            textView_Ncontrol.setText("Número de control: "+alumno.getNumeroControl());
+            textView_Nombre.setText("Nombre: "+alumno.getNombre());
+            textView_Carrera.setText("Carrera: "+alumno.getCarrera());
+            textView_Grupo.setText("Grupo: "+alumno.getGrupo());
 
             dialogSearchInvitation.show();
 
-            buttonBuscar.setOnClickListener(new View.OnClickListener() {
+             buttonCancelar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if(alumno.getStatus()<2)
+                    {
+                        alumno.setStatus(alumno.getStatus()+1);
+                        ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Cancelando invitación...", true);
+                        fireStoreHelper.UpdateData(dialog, MainActivity.this, alumno, MainActivity.this);
+                        dialogSearchInvitation.dismiss();
+                    }
+                    else
+                    {
+                        dialogSearchInvitation.dismiss();
 
-
+                        AlertDialog.Builder  alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+                        alertDialogBuilder.setCancelable(false);
+                        alertDialogBuilder.setTitle("Invitaciones canceladas.");
+                        alertDialogBuilder.setMessage("Los invitados ya están dentro de la ceremonia.");
+                        alertDialogBuilder.setPositiveButton("Aceptar",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface alertDialog, int i)
+                                    {
+                                        alertDialog.cancel();
+                                    }
+                                }
+                        );
+                        alertDialogBuilder.show();
+                        //Snackbar.make(findViewById(android.R.id.content), "Los invitados ya están dentro de la ceremonia.", Snackbar.LENGTH_LONG).show();
+                        //Toast.makeText(MainActivity.this,"Los invitados ya estan dentro de la ceremonia.",Toast.LENGTH_SHORT).show()
+                    }
                 }
             });
 
@@ -107,10 +141,15 @@ public class MainActivity extends AppCompatActivity {
                     dialogSearchInvitation.dismiss();
                 }
             });
-        }
-        else
-        {
+    }
 
-        }
+    @Override
+    public void getAlumno(Alumno alumno) {
+       showCancelInvitation(alumno);
+    }
+
+    @Override
+    public void getMessage(String message) {
+        Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
     }
 }

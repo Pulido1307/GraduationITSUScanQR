@@ -8,8 +8,6 @@ public class Alumno {
     private String grupo;
     private int status;
 
-    public Alumno () {}
-
     public Alumno(String numeroControl, String nombre, String carrera, String grupo, int status) {
         this.numeroControl = numeroControl;
         this.nombre = nombre;
