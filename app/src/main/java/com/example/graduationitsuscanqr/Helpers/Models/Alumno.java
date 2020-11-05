@@ -1,4 +1,4 @@
-package com.example.graduationitsuscanqr;
+package com.example.graduationitsuscanqr.Helpers.Models;
 
 public class Alumno {
 
