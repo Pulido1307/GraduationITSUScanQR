@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "881597366214",
+    "firebase_url": "https://graduacion-itsu.firebaseio.com",
+    "project_id": "graduacion-itsu",
+    "storage_bucket": "graduacion-itsu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881597366214:android:c0c9d00f2f431a0b703cc7",
+        "android_client_info": {
+          "package_name": "com.example.graduationitsuscanqr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881597366214-n25ra7q19sjea4f0t1j78rlsj5h84tp1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.graduationitsuscanqr",
+            "certificate_hash": "39af6a0cb19be32008677733dce052d3da2f1f24"
+          }
+        },
+        {
+          "client_id": "881597366214-lrrgl5kuuq2rrn9mum9lokaljhp45hqm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDC-cAfJsO6W--9jQIlYRT_Ma4dsZ2p8R4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881597366214-lrrgl5kuuq2rrn9mum9lokaljhp45hqm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881597366214:android:fe1842df309e02ae703cc7",
+        "android_client_info": {
+          "package_name": "com.salvador.graduationitsucreateqrs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881597366214-t3vtn2qcd66unhqljrvobb49t5hnk44f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.salvador.graduationitsucreateqrs",
+            "certificate_hash": "39af6a0cb19be32008677733dce052d3da2f1f24"
+          }
+        },
+        {
+          "client_id": "881597366214-lrrgl5kuuq2rrn9mum9lokaljhp45hqm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDC-cAfJsO6W--9jQIlYRT_Ma4dsZ2p8R4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881597366214-lrrgl5kuuq2rrn9mum9lokaljhp45hqm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
