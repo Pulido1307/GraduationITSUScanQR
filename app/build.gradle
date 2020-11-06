@@ -44,4 +44,9 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:26.0.0')
     implementation 'com.google.firebase:firebase-analytics'
+    //encriptacion base 64
+    // https://mvnrepository.com/artifact/commons-codec/commons-codec
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.14'
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-crypto
+    implementation group: 'org.apache.commons', name: 'commons-crypto', version: '1.0.0'
 }

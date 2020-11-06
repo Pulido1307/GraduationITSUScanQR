@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.graduationitsuscanqr.Helpers.CaptureActivityPortrait;
+import com.example.graduationitsuscanqr.Helpers.Encriptacion;
 import com.example.graduationitsuscanqr.Helpers.FireStoreHelper;
 import com.example.graduationitsuscanqr.Helpers.Models.Alumno;
 import com.example.graduationitsuscanqr.Interfaces.Invitado;
@@ -69,9 +72,18 @@ public class MainActivity extends AppCompatActivity implements Invitado, Message
             {
                 ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Buscando invitación...", true);
                 String values = result.getContents();
-                final String array[] = values.split("\\|");
-                fireStoreHelper.getData(array[0], dialog, MainActivity.this, MainActivity.this);
 
+                try {
+                    final String array[] = new Encriptacion().decryptAE(values).split("\\|");
+                    if(array[0].length() == 8 && isNumeric(array[0])){
+                        fireStoreHelper.getData(array[0], dialog, MainActivity.this, MainActivity.this);
+                    }else {
+                        showAlertQRInvalid(dialog);
+
+                    }
+                }catch (Exception e){
+                   showAlertQRInvalid(dialog);
+                }
             }
             else
             {
@@ -79,6 +91,34 @@ public class MainActivity extends AppCompatActivity implements Invitado, Message
                 //Toast.makeText(MainActivity.this,"Cancelaste escaneo.",Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private boolean isNumeric(String s){
+        try {
+            Integer.valueOf(s);
+            return true;
+        }catch (NumberFormatException e){ return false; }
+    }
+
+
+    private void showAlertQRInvalid(Dialog dialog){
+        dialog.dismiss();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setTitle("QR Inválido.");
+        alertDialogBuilder.setMessage("El QR escaneado no contiene la información requerida.");
+        alertDialogBuilder.setPositiveButton("Aceptar",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface alertDialog, int i)
+                    {
+                        alertDialog.cancel();
+
+                    }
+                }
+        );
+        alertDialogBuilder.show();
+
     }
 
     private void showCancelInvitation(Alumno alumno){
