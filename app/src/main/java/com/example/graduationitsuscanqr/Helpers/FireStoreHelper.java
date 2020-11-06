@@ -19,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class FireStoreHelper {
@@ -27,7 +28,7 @@ public class FireStoreHelper {
     private static final CollectionReference AlumnosCollection = db.collection("alumnos");
     private Alumno alumno;
 
-    public void getData(String document, final ProgressDialog dialog, final Context context, Invitado invitado)
+    public void getData(String document, final ProgressDialog dialog, final Context context, Invitado invitado, Messages message)
     {
         dialog.show();
         AlumnosCollection.document(document).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -36,10 +37,18 @@ public class FireStoreHelper {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                         Map<String,Object>data=document.getData();
-                        alumno = new Alumno(document.getId(), String.valueOf(data.get("nombre")), String.valueOf(data.get("carrera")),String.valueOf(data.get("grupo")), Integer.parseInt(data.get("status").toString()));
-                        Log.e("Alumno: ", alumno.getNombre() +" " + alumno.getGrupo());
-                        invitado.getAlumno(alumno);
-                        dialog.dismiss();
+                        if (Objects.requireNonNull(document).exists())
+                        {
+                            alumno = new Alumno(document.getId(), String.valueOf(data.get("nombre")), String.valueOf(data.get("carrera")),String.valueOf(data.get("grupo")), Integer.parseInt(data.get("status").toString()));
+                            Log.e("Alumno: ", alumno.getNombre() +" " + alumno.getGrupo());
+                            invitado.getAlumno(alumno);
+                            dialog.dismiss();
+                        }
+                        else
+                        {
+                            message.getMessage("Este alumno no esta en la lista de invitados.");
+                            dialog.dismiss();
+                        }
                 }
             }
         });

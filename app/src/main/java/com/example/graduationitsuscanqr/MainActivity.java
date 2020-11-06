@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements Invitado, Message
                 try {
                     final String array[] = new Encriptacion().decryptAE(values).split("\\|");
                     if(array[0].length() == 8 && isNumeric(array[0])){
-                        fireStoreHelper.getData(array[0], dialog, MainActivity.this, MainActivity.this);
+                        fireStoreHelper.getData(array[0], dialog, MainActivity.this, MainActivity.this, MainActivity.this);
                     }else {
                         showAlertQRInvalid(dialog);
 
