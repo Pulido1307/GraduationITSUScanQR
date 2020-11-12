@@ -1,19 +1,29 @@
-package com.example.graduationitsuscanqr.Helpers.Models;
+package com.example.graduationitsuscanqr.helpers.models;
 
 public class Alumno {
 
     private String numeroControl;
+    private String numeroSilla;
     private String nombre;
     private String carrera;
     private String grupo;
     private int status;
 
-    public Alumno(String numeroControl, String nombre, String carrera, String grupo, int status) {
+    public Alumno(String numeroControl,String numeroSilla, String nombre, String carrera, String grupo, int status) {
         this.numeroControl = numeroControl;
+        this.numeroSilla=numeroSilla;
         this.nombre = nombre;
         this.carrera = carrera;
         this.grupo = grupo;
         this.status = status;
+    }
+
+    public String getNumeroSilla() {
+        return numeroSilla;
+    }
+
+    public void setNumeroSilla(String numeroSilla) {
+        this.numeroSilla = numeroSilla;
     }
 
     public String getNumeroControl() {

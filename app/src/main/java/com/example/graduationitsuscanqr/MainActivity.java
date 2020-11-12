@@ -13,13 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.graduationitsuscanqr.Helpers.CaptureActivityPortrait;
-import com.example.graduationitsuscanqr.Helpers.Encriptacion;
-import com.example.graduationitsuscanqr.Helpers.FireStoreHelper;
-import com.example.graduationitsuscanqr.Helpers.Models.Alumno;
+import com.example.graduationitsuscanqr.helpers.CaptureActivityPortrait;
+import com.example.graduationitsuscanqr.helpers.utility.Encriptacion;
+import com.example.graduationitsuscanqr.repository.FirestoreHelper;
+import com.example.graduationitsuscanqr.helpers.models.Alumno;
 import com.example.graduationitsuscanqr.Interfaces.Invitado;
 import com.example.graduationitsuscanqr.Interfaces.Messages;
 import com.google.android.material.snackbar.Snackbar;
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements Invitado, Message
 
     private IntentResult result= null;
     private Button button_scannear;
-    private FireStoreHelper fireStoreHelper = new FireStoreHelper();
+    private FirestoreHelper fireStoreHelper = new FirestoreHelper();
     LottieAnimationView animationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,13 +131,15 @@ public class MainActivity extends AppCompatActivity implements Invitado, Message
             final AlertDialog dialogSearchInvitation =builder.create();
             dialogSearchInvitation.setCancelable(false);
             Button buttonCancelar = view.findViewById(R.id.button_cancelar);
-            Button buttonClose = view.findViewById(R.id.buttonClose);
+            /*Button buttonClose = view.findViewById(R.id.buttonClose);*/
 
+            TextView textView_Nsilla = view.findViewById(R.id.textView_NSilla);
             TextView textView_Ncontrol = view.findViewById(R.id.textView_Ncontrol);
             TextView textView_Nombre = view.findViewById(R.id.textView_Nombre);
             TextView textView_Carrera = view.findViewById(R.id.textView_Carrera);
             TextView textView_Grupo = view.findViewById(R.id.textView_Grupo);
 
+            textView_Nsilla.setText("Código de asiento: "+alumno.getNumeroSilla());
             textView_Ncontrol.setText("Número de control: "+alumno.getNumeroControl());
             textView_Nombre.setText("Nombre: "+alumno.getNombre());
             textView_Carrera.setText("Carrera: "+alumno.getCarrera());
@@ -156,12 +157,12 @@ public class MainActivity extends AppCompatActivity implements Invitado, Message
                 }
             });
 
-            buttonClose.setOnClickListener(new View.OnClickListener() {
+            /*buttonClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     dialogSearchInvitation.dismiss();
                 }
-            });
+            });*/
     }
 
     @Override

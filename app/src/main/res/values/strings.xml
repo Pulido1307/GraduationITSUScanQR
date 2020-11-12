@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">GraduationITSUScanQR</string>
+    <string name="app_name">Graduación ITSU</string>
+    <string name="numero_de_asiento">Número de Asiento:</string>
     <string name="numero_de_control">Número de control:</string>
     <string name="graduacion_itsu">Graduación ITSU</string>
     <string name="cancelar_inivitacion">Cancelar Invitación</string>

@@ -1,4 +1,4 @@
-package com.example.graduationitsuscanqr.Helpers;
+package com.example.graduationitsuscanqr.repository;
 
 
 import android.app.ProgressDialog;
@@ -6,9 +6,10 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import com.example.graduationitsuscanqr.Helpers.Models.Alumno;
+import com.example.graduationitsuscanqr.helpers.models.Alumno;
 import com.example.graduationitsuscanqr.Interfaces.Invitado;
 import com.example.graduationitsuscanqr.Interfaces.Messages;
+import com.example.graduationitsuscanqr.helpers.utility.StringHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,7 +23,7 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class FireStoreHelper {
+public class FirestoreHelper {
 
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final CollectionReference AlumnosCollection = db.collection("alumnos");
@@ -39,7 +40,7 @@ public class FireStoreHelper {
                         Map<String,Object>data=document.getData();
                         if (Objects.requireNonNull(document).exists())
                         {
-                            alumno = new Alumno(document.getId(), String.valueOf(data.get("nombre")), String.valueOf(data.get("carrera")),String.valueOf(data.get("grupo")), Integer.parseInt(data.get("status").toString()));
+                            alumno = new Alumno(document.getId(),String.valueOf(data.get("asiento")), String.valueOf(data.get("nombre")), StringHelper.getCarrara(String.valueOf(data.get("carrera"))),String.valueOf(data.get("grupo")), Integer.parseInt(data.get("status").toString()));
                             Log.e("Alumno: ", alumno.getNombre() +" " + alumno.getGrupo());
                             invitado.getAlumno(alumno);
                             dialog.dismiss();

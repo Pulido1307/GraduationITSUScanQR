@@ -1,6 +1,6 @@
 package com.example.graduationitsuscanqr.Interfaces;
 
-import com.example.graduationitsuscanqr.Helpers.Models.Alumno;
+import com.example.graduationitsuscanqr.helpers.models.Alumno;
 
 public interface Invitado {
 

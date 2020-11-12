@@ -1,4 +1,4 @@
-package com.example.graduationitsuscanqr.Helpers;
+package com.example.graduationitsuscanqr.helpers.utility;
 
 import org.apache.commons.codec.binary.Base64;
 
