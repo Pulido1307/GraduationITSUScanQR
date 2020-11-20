@@ -14,31 +14,31 @@ public class StringHelper
         switch(val)
         {
             case "1":
-                carr = "Sistemas";
+                carr = "Ing. en Sistemas";
                 break;
             case "3":
-                carr = "Industrial";
+                carr = "Ing. en Industrial";
                 break;
             case "4":
-                carr = "Alimentarias";
+                carr = "Ing. en Alimentarias";
                 break;
             case "5":
-                carr = "Electrónica";
+                carr = "Ing. en Electrónica";
                 break;
             case "6":
-                carr = "Mecatrónica";
+                carr = "Ing. en Mecatrónica";
                 break;
             case "7":
-                carr = "Mecánica";
+                carr = "Ing. en Administración";
                 break;
             case "8":
-                carr = "Administración";
+                carr = "Ing. Mecánica";
                 break;
             case "9":
-                carr = "Sistemas Mixta";
+                carr = "Ing. en Sistemas Mixta";
                 break;
             case "10":
-                carr = "Administración Mixta";
+                carr = "Ing.en Administración Mixta";
                 break;
             case "11":
                 carr = "Civil";
