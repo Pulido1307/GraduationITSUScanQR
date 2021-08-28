@@ -10,5 +10,33 @@
     <string name="escanear_qr">Escanear QR</string>
     <string name="grupo">Grupo:</string>
     <string name="todo">TODO</string>
+    <string name="gestor_central">Gestor central</string>
+    <string name="cerrar_sesi_n">Cerrar sesión</string>
+    <string name="ingenier_a_en_sistemas">Ingeniería en Sistemas </string>
+    <string name="nueva_generacion">Nueva Generación</string>
+    <string name="agregar">Agregar</string>
+    <string name="actualizar_registro">Actualizar Registros</string>
+    <string name="consultar">Consultar</string>
+    <string name="n_mero_de_control">Número de control</string>
+    <string name="nombre_completo">Nombre completo</string>
+    <string name="asiento">Asiento</string>
+    <string name="seleccione_una_carrera">Seleccione una carrera</string>
+    <string name="seleccione_grupo">Seleccione un grupo</string>
+    <string name="email">Correo electrónico</string>
+
+    <string name="registrar">Registrar</string>
+    <string name="salir">Salir</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="carre">Carrera</string>
+    <string name="update">Actualizar</string>
+    <string name="asientos_ocupados">Asientos ocupados</string>
+    <string name="message_security">Estimado usuario, para poder hacer uso de la app es necesario que introduzca la contraseña que los administradores le han proporcionado.</string>
+    <string name="pass">Contraseña</string>
+    <string name="acceder">Acceder</string>
+    <string name="eliminar_registros_actuales">Eliminar registros actuales</string>
+    <string name="nuevos_agregar_registros_al_sistema">Nuevos Agregar registros al Sistema</string>
+    <string name="setup_information">Setup Information</string>
+    <string name="agregar_registros_al_firebase">Agregar Registros al Firebase</string>
+    <string name="liberar_recursos_del_sistema">Liberar recursos del Sistema</string>
 
 </resources>

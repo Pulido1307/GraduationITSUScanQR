@@ -1,11 +1,16 @@
 package com.example.graduationitsuscanqr.repository;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
+import com.example.graduationitsuscanqr.helpers.AlertDialogPersonalized;
 import com.example.graduationitsuscanqr.helpers.models.Alumno;
 import com.example.graduationitsuscanqr.Interfaces.Invitado;
 import com.example.graduationitsuscanqr.Interfaces.Messages;
@@ -78,6 +83,135 @@ public class FirestoreHelper {
                         dialog.dismiss();
                     }
                 });
+    }
+
+    public void validAlumno(final ProgressDialog dialog, final Context context, final String num, final String nombre, final String carrera, final String asiento, final String correo, final String grupo){
+        AlumnosCollection.document(num).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    if(task.getResult().exists()){
+                        dialog.dismiss();
+                        new AlertDialogPersonalized().alertDialogInformacion("El número de control ya existe en la base de datos",context);
+                    }else {
+                        final Map<String, Object> alumno = new HashMap<>();
+                        alumno.put("nombre", nombre);
+                        alumno.put("carrera", carrera);
+                        alumno.put("asiento", asiento);
+                        alumno.put("correo", correo);
+                        alumno.put("grupo", grupo);
+                        alumno.put("status", 0);
+
+                        addAlumno(dialog, context, num, alumno);
+                    }
+                } else {
+                    Toast.makeText(context, "Error, verifique su conexión a Internet, si los problemas continuan contacte al administrador", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+    private void addAlumno(final ProgressDialog dialog, final Context context, final String num, final Map<String, Object> data){
+        AlumnosCollection.document(num).set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                dialog.dismiss();
+                if(task.isSuccessful()){
+                    new AlertDialogPersonalized().alertDialogInformacion("Alumno registrado en el banco de datos.", context);
+                }else {
+                    new AlertDialogPersonalized().alertDialogInformacion("Error al registrar alumno en el banco de datos.", context);
+                }
+            }
+        });
+    }
+
+    public void updateAlumno(final ProgressDialog dialog, final Context context, final String num, final String nombre, final String carrera, final String asiento, final String correo, final String grupo){
+        final Map<String, Object> alumno = new HashMap<>();
+        alumno.put("nombre", nombre);
+        alumno.put("carrera", carrera);
+        alumno.put("asiento", asiento);
+        alumno.put("correo", correo);
+        alumno.put("grupo", grupo);
+
+        AlumnosCollection.document(num).update(alumno)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        dialog.dismiss();
+
+                        new AlertDialogPersonalized().alertDialogInformacion("Se actualizaron los datos del alumno.", context);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        dialog.dismiss();
+                        new AlertDialogPersonalized().alertDialogInformacion("No se actualizaron los datos del alumno, verifica tu conexión a Internet.", context);
+                    }
+                });
+    }
+
+    public void validDeleteAlumno(final ProgressDialog dialog, final Context context, final String num){
+        AlumnosCollection.document(num).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().exists()) {
+                        deleteDataAlumno(dialog, context, num);
+                    } else {
+                        new AlertDialogPersonalized().alertDialogInformacion("El número de control no existe en la base de datos.",context);
+                        dialog.dismiss();
+                    }
+                } else {
+                    Toast.makeText(context, "Error, verifique su conexión a Internet, si los problemas continuan contacte al administrador", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void deleteDataAlumno(ProgressDialog dialog, Context context, String num) {
+        AlumnosCollection.document(num).delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        dialog.dismiss();
+                        new AlertDialogPersonalized().alertDialogInformacion("Se eliminarón los datos del alumno",context);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e)
+                    {
+                        new AlertDialogPersonalized().alertDialogInformacion("No se eliminarón los datos del alumno, verifica tu conexión a Internet.",context);
+                        dialog.dismiss();
+                    }
+                });
+    }
+
+
+    public void getDataAlumno(final Invitado respondAlumno,final ProgressDialog dialog, final Context context, final String num){
+        AlumnosCollection.document(num).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(Task<DocumentSnapshot> task) {
+                dialog.dismiss();
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    Map<String, Object> data = document.getData();
+
+                    if(Objects.requireNonNull(document).exists()){
+                        alumno = new Alumno(document.getId(), data.get("asiento").toString(), data.get("nombre").toString(), StringHelper.getCarrara(data.get("carrera").toString()), data.get("grupo").toString(), Integer.valueOf(data.get("status").toString()), data.get("correo").toString());
+                        respondAlumno.getAlumno(alumno);
+                    } else {
+                        new AlertDialogPersonalized().alertDialogInformacion("El alumno buscado no existe en el banco de datos.", context);
+                        alumno = null;
+                        respondAlumno.getAlumno(alumno);
+                    }
+
+                }else {
+                    new AlertDialogPersonalized().alertDialogInformacion("Error, verifique su conexión a Internet, si los problemas continuan contacte al administrador", context);
+                }
+            }
+        });
+
     }
 
 }

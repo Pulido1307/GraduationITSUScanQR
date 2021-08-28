@@ -11,18 +11,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GraduationITSUScanQR">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".NewGenerationActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ManagementActivity"></activity>
+        <activity android:name=".SecurityActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
+        <activity android:name=".AddAndUpdateActivity"
+            android:parentActivityName=".ManagementActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ManagementActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".SplashActivity"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".helpers.CaptureActivityPortrait"
             android:screenOrientation="portrait"

@@ -1,6 +1,8 @@
 package com.example.graduationitsuscanqr;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -8,15 +10,20 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.graduationitsuscanqr.helpers.CaptureActivityPortrait;
 import com.example.graduationitsuscanqr.helpers.utility.Encriptacion;
+import com.example.graduationitsuscanqr.helpers.utility.SharedPreferencesHelper;
 import com.example.graduationitsuscanqr.repository.FirestoreHelper;
 import com.example.graduationitsuscanqr.helpers.models.Alumno;
 import com.example.graduationitsuscanqr.Interfaces.Invitado;
@@ -25,18 +32,26 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity implements Invitado, Messages {
 
+    private TextView textView_about;
     private IntentResult result= null;
     private Button button_scannear;
     private FirestoreHelper fireStoreHelper = new FirestoreHelper();
     LottieAnimationView animationView;
+    private SharedPreferencesHelper sharedPreferencesHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         animationView = findViewById(R.id.animationViewG);
         button_scannear = findViewById(R.id.button_scannear);
+        textView_about = findViewById(R.id.textView_about);
+        textView_about.setText(textView_about.getText() + " " +new SimpleDateFormat("yyyy").format(new Date()));
         button_scannear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements Invitado, Message
         });
 
         animationView.setMinAndMaxFrame(193,194);
+        sharedPreferencesHelper = new SharedPreferencesHelper(MainActivity.this);
     }
 
     private void escanearQR()
@@ -194,5 +210,39 @@ public class MainActivity extends AppCompatActivity implements Invitado, Message
     @Override
     public void getMessage(String message) {
         Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.overflow, menu);
+        return true;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+
+        switch (id){
+            case R.id.item_management:
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.gestor_central), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, ManagementActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.item_sign_off:
+                sharedPreferencesHelper.deletePreferences();
+                Toast.makeText(MainActivity.this, getResources().getText(R.string.cerrar_sesi_n) + "...", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, SecurityActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

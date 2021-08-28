@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_management"
+        android:title="@string/gestor_central" />
+    <item
+        android:id="@+id/item_sign_off"
+        android:title="@string/cerrar_sesi_n" />
+</menu>
