@@ -17,6 +17,8 @@ public class ManagementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_management);
 
+        setTitle(getResources().getString(R.string.gestor_central));
+
         button_new_generation = findViewById(R.id.button_new_generation_management);
         button_add = findViewById(R.id.button_add_management);
         button_update = findViewById(R.id.button_update_management);

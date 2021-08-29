@@ -31,7 +31,7 @@ import java.util.Objects;
 public class FirestoreHelper {
 
     private static FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private static final CollectionReference AlumnosCollection = db.collection("alumnos");
+    public static final CollectionReference AlumnosCollection = db.collection("alumnos");
     private Alumno alumno;
 
     public void getData(String document, final ProgressDialog dialog, final Context context, Invitado invitado, Messages message)

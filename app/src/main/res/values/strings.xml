@@ -38,5 +38,6 @@
     <string name="setup_information">Setup Information</string>
     <string name="agregar_registros_al_firebase">Agregar Registros al Firebase</string>
     <string name="liberar_recursos_del_sistema">Liberar recursos del Sistema</string>
+    <string name="message_pass">Introducir contraseña para acceder a funciones de administrador.</string>
 
 </resources>

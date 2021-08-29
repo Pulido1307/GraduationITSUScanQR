@@ -21,21 +21,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.graduationitsuscanqr.Interfaces.Password;
 import com.example.graduationitsuscanqr.helpers.CaptureActivityPortrait;
 import com.example.graduationitsuscanqr.helpers.utility.Encriptacion;
 import com.example.graduationitsuscanqr.helpers.utility.SharedPreferencesHelper;
+import com.example.graduationitsuscanqr.repository.FirebasePasswords;
 import com.example.graduationitsuscanqr.repository.FirestoreHelper;
 import com.example.graduationitsuscanqr.helpers.models.Alumno;
 import com.example.graduationitsuscanqr.Interfaces.Invitado;
 import com.example.graduationitsuscanqr.Interfaces.Messages;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements Invitado, Messages {
+public class MainActivity extends AppCompatActivity implements Invitado, Messages, Password {
 
     private TextView textView_about;
     private IntentResult result= null;
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements Invitado, Message
     private FirestoreHelper fireStoreHelper = new FirestoreHelper();
     LottieAnimationView animationView;
     private SharedPreferencesHelper sharedPreferencesHelper;
+    private String passIntoUser = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,15 +232,13 @@ public class MainActivity extends AppCompatActivity implements Invitado, Message
 
         switch (id){
             case R.id.item_management:
-                Toast.makeText(MainActivity.this, getResources().getString(R.string.gestor_central), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, ManagementActivity.class);
-                startActivity(intent);
+                showAlertDialogPassword();
                 break;
 
             case R.id.item_sign_off:
                 sharedPreferencesHelper.deletePreferences();
                 Toast.makeText(MainActivity.this, getResources().getText(R.string.cerrar_sesi_n) + "...", Toast.LENGTH_SHORT).show();
-                intent = new Intent(this, SecurityActivity.class);
+                Intent intent = new Intent(this, SecurityActivity.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -244,5 +246,45 @@ public class MainActivity extends AppCompatActivity implements Invitado, Message
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showAlertDialogPassword() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+
+        View view = inflater.inflate(R.layout.dialog_check_pass, null);
+        builder.setView(view);
+
+        final AlertDialog dialogPassword = builder.create();
+        //dialogPassword.setCancelable(false);
+        Button buttonCheck = view.findViewById(R.id.button_CheckSecurity);
+        TextInputLayout editTextPassword = view.findViewById(R.id.editText_PassSecurity_check);
+
+        buttonCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!editTextPassword.getEditText().getText().toString().isEmpty()) {
+                    passIntoUser = editTextPassword.getEditText().getText().toString();
+                    ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Verificando contraseña...", true);
+                    new FirebasePasswords().getPassword("master_key", dialog, MainActivity.this, MainActivity.this);
+                    dialogPassword.cancel();
+                } else {
+                    editTextPassword.setError("Campo requerido");
+                }
+            }
+        });
+
+        dialogPassword.show();
+    }
+
+    @Override
+    public void getPasswordFirebase(String pass) {
+        if (pass.equals(passIntoUser)) {
+            Toast.makeText(MainActivity.this, getResources().getText(R.string.gestor_central) + "...", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ManagementActivity.class);
+            startActivity(intent);
+        } else {
+            Snackbar.make(findViewById(android.R.id.content), "Contraseña incorrecta, intenta de nuevo.", Snackbar.LENGTH_LONG).show();
+        }
     }
 }
