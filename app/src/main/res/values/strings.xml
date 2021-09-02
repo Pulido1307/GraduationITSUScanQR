@@ -45,5 +45,6 @@
     <string name="ingresa_los_datos_al_sistema_n_deben_de_tener_el_siguiente_formato_n_nsin_tel_fono_n2">\"NUMERO CONTROL\",\"ID ASIENTO\",\"NOMBRE POR APELLIDOS(PATERNO MATERNO NOMBRES)\",\"NUMERO CARRERA\",\"GRUPO\",\"EMAIL\",\"\" </string>
     <string name="ingrese_los_datos_m_x_400_registros">Ingrese los datos máx 400 (registros)</string>
     <string name="agregar_datos_al_sistema">Agregar datos al sistema</string>
+    <string name="numero_de_invitaciones">Número de invitaciones</string>
 
 </resources>
