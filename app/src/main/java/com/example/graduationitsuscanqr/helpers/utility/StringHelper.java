@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class StringHelper {
     private final static String EXREGEMAIL="([a-z,0-9]+((\\.|_|-)[a-z0-9]+)*)@([a-z,0-9]+(\\.[a-z0-9]+)*)\\.([a-z]{2,})(\\.([a-z]{2}))?";
-    public final static  String REGX = "(\\\"\\d{8}\\\",\\\"[A-Z,0-9]+\\\",\\\"[A-Z,\\s,Ñ]+\\\",\\\"\\d{1}\\\",\\\"[A,B,U,P]\\\",\\\"([a-z,0-9]+((\\.|_|-)[a-z0-9]+)*)@([a-z,0-9]+(\\.[a-z0-9]+)*)\\.([a-z]{2,})(\\.([a-z]{2}))?\\\")";
+    public final static  String REGX = "(\\\"\\d{8}\\\",\\\"[A-Z,0-9]+\\\",\\\"[A-Z,\\s,Ñ]+\\\",\\\"\\d{1}\\\",\\\"[A,B,U,P]\\\",\\\"([A-Z,0-9]+((\\.|_|-)[A-Z0-9]+)*)@([A-Z,0-9]+(\\.[A-Z0-9]+)*)\\.([A-Z]{2,})(\\.([A-Z]{2}))?\\\",)";
     //public final static String CARRERAS[] = {"ING. EN SISTEMAS COMPUTACIONALES", "ING. ADMINISTRACION","ING. ELECTRONICA","ING. CIVIL", "ING. MECATRONICA","ING. MECANICA","ING. INDUSTRIAL", "ING. EN INDUSTRIAS ALIMENTARIAS"};
     public static final String CARRERAS[] = {"Ing. en Sistemas", "Ing. en Industrial", "Ing. en Alimentarias", "Ing. en Electrónica","Ing. en Mecatrónica", "Ing. en Administración",
             "Ing. Mecánica","Ing. en Sistemas Mixta","Ing.en Administración Mixta","Ing. Civil"};

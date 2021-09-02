@@ -113,12 +113,12 @@ public class NewGenerationActivity extends AppCompatActivity implements Invitado
                 Log.e("Datos", editText_alumnos.getEditText().getText().toString() + " " + arre.length);
                 for (int i = 0; i < arre.length; i++) {
                     String texto = arre[i].trim();
-                    if (Pattern.matches(StringHelper.REGX, texto)) {
+                    if (Pattern.matches(StringHelper.REGX, texto.toUpperCase())) {
                         String valores[] = texto.split(",");
                         for (int k = 0; k < valores.length; k++) {
                             valores[k] = valores[k].substring(1, valores[k].length() - 1);
                         }
-                        Alumno alumno = new Alumno(valores[0], valores[1], valores[2], valores[3],valores[4],valores[6]);
+                        Alumno alumno = new Alumno(valores[0], valores[1], valores[2], valores[3],valores[4],valores[5]);
                         alumnos.add(alumno);
                     } else {
                         getMessage("Error en el registro " + (i + 1) + " " + arre[i]);

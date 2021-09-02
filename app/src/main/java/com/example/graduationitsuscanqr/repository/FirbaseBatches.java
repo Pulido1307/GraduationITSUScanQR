@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.example.graduationitsuscanqr.Interfaces.Messages;
 import com.example.graduationitsuscanqr.helpers.models.Alumno;
+import com.example.graduationitsuscanqr.helpers.models.Alumno2;
 import com.example.graduationitsuscanqr.helpers.utility.StringHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,6 +44,7 @@ public class FirbaseBatches {
     }
 
     static int cant = 0;
+
     private void delete(Messages information, final ProgressDialog dialog, QuerySnapshot result) {
         int elementos = result.size();
         if (elementos > 0) {
@@ -88,7 +90,7 @@ public class FirbaseBatches {
 
         for (int i = 0; i < alumnos.size(); i++) {
             nycRef = AlumnosCollection.document(alumnos.get(i).getNumeroControl());
-            batch.set(nycRef, new Alumno());
+            batch.set(nycRef, new Alumno2());
         }
         batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -99,7 +101,6 @@ public class FirbaseBatches {
                 }
             }
         });
-
     }
 
     // este proceso solo se puede hacer de 500 en 500 no en más
