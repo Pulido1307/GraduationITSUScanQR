@@ -10,6 +10,8 @@ public class Alumno {
     private int status;
     private String correo;
 
+    public Alumno(){}
+
     public Alumno(String numeroControl,String numeroSilla, String nombre, String carrera, String grupo, int status) {
         this.numeroControl = numeroControl;
         this.numeroSilla=numeroSilla;
@@ -17,6 +19,16 @@ public class Alumno {
         this.carrera = carrera;
         this.grupo = grupo;
         this.status = status;
+    }
+
+    public Alumno(String numeroControl,String numeroSilla, String nombre, String carrera, String grupo, String correo) {
+        this.numeroControl = numeroControl;
+        this.numeroSilla=numeroSilla;
+        this.nombre = nombre;
+        this.carrera = carrera;
+        this.grupo = grupo;
+        this.status = 0;
+        this.correo = correo;
     }
 
     public Alumno(String numeroControl,String numeroSilla, String nombre, String carrera, String grupo, int status, String correo) {
