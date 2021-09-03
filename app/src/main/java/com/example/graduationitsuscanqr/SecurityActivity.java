@@ -9,21 +9,21 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.graduationitsuscanqr.Interfaces.Messages;
-import com.example.graduationitsuscanqr.Interfaces.Password;
+import com.example.graduationitsuscanqr.Interfaces.Configuration;
 import com.example.graduationitsuscanqr.helpers.utility.SharedPreferencesHelper;
-import com.example.graduationitsuscanqr.repository.FirebasePasswords;
+import com.example.graduationitsuscanqr.repository.FirebaseConfiguration;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SecurityActivity extends AppCompatActivity implements Password, Messages {
+public class SecurityActivity extends AppCompatActivity implements Configuration, Messages {
 
     private Button button_CheckSecurity;
     private TextInputLayout editText_PassSecurity;
     private SharedPreferencesHelper sharedPreferencesHelper;
-    private FirebasePasswords firebasePasswords;
+    private FirebaseConfiguration firebaseConfiguration;
     private String pass;
 
     @Override
@@ -35,7 +35,7 @@ public class SecurityActivity extends AppCompatActivity implements Password, Mes
         editText_PassSecurity = findViewById(R.id.editText_Security_Principal);
 
         sharedPreferencesHelper = new SharedPreferencesHelper(SecurityActivity.this);
-        firebasePasswords = new FirebasePasswords();
+        firebaseConfiguration = new FirebaseConfiguration();
 
         button_CheckSecurity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +65,7 @@ public class SecurityActivity extends AppCompatActivity implements Password, Mes
         if (!editText_PassSecurity.getEditText().getText().toString().isEmpty()) {
             pass = editText_PassSecurity.getEditText().getText().toString();
             ProgressDialog dialog = ProgressDialog.show(SecurityActivity.this, "", "Verificando contraseña...", true);
-            firebasePasswords.getPassword("super_master_key", dialog, SecurityActivity.this, SecurityActivity.this);
+            firebaseConfiguration.getPassword("super_master_key", dialog, SecurityActivity.this, SecurityActivity.this);
         } else {
             editText_PassSecurity.setError("Campo requerido");
         }
@@ -88,5 +88,9 @@ public class SecurityActivity extends AppCompatActivity implements Password, Mes
         } else {
             Snackbar.make(findViewById(android.R.id.content), "Contraseña incorrecta, intenta de nuevo.", Snackbar.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void getNumeroInvitaciones(String num) {
     }
 }

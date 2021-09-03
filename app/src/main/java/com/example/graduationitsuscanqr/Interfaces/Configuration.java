@@ -1,5 +1,6 @@
 package com.example.graduationitsuscanqr.Interfaces;
 
-public interface Password {
+public interface Configuration {
     void getPasswordFirebase(String pass);
+    void getNumeroInvitaciones(String num);
 }

@@ -16,6 +16,7 @@ import com.example.graduationitsuscanqr.Interfaces.Messages;
 import com.example.graduationitsuscanqr.helpers.models.Alumno;
 import com.example.graduationitsuscanqr.helpers.utility.StringHelper;
 import com.example.graduationitsuscanqr.repository.FirbaseBatches;
+import com.example.graduationitsuscanqr.repository.FirebaseConfiguration;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -24,9 +25,10 @@ import java.util.regex.Pattern;
 
 public class NewGenerationActivity extends AppCompatActivity implements Invitado, Messages {
 
-    private ArrayList<Alumno> alumnos= new ArrayList<>();
+    private ArrayList<Alumno> alumnos = new ArrayList<>();
     private Button buttonclear, buttonsetup, buttonadd, buttonclearinfo, buttonadd_firebase;
     private FirbaseBatches firbaseBatches = new FirbaseBatches();
+    private TextInputLayout textInputLayout_NumeroInvitaciones;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class NewGenerationActivity extends AppCompatActivity implements Invitado
         buttonclear = findViewById(R.id.buttonclear);
         buttonsetup = findViewById(R.id.buttonsetup);
         buttonclearinfo = findViewById(R.id.buttonclearinfo);
+        textInputLayout_NumeroInvitaciones = findViewById(R.id.textInputLayout_numeroInvitaciones);
         options();
 
     }
@@ -54,6 +57,7 @@ public class NewGenerationActivity extends AppCompatActivity implements Invitado
         buttonsetup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                actualizarNumeroInvitaciones();
                 ProgressDialog dialog = ProgressDialog.show(NewGenerationActivity.this, "", "Configurando...", true);
                 if (alumnos.size() <= 400) {
                     firbaseBatches.setupCollection(NewGenerationActivity.this, dialog, alumnos);
@@ -118,7 +122,7 @@ public class NewGenerationActivity extends AppCompatActivity implements Invitado
                         for (int k = 0; k < valores.length; k++) {
                             valores[k] = valores[k].substring(1, valores[k].length() - 1);
                         }
-                        Alumno alumno = new Alumno(valores[0], valores[1], valores[2], valores[3],valores[4],valores[5]);
+                        Alumno alumno = new Alumno(valores[0], valores[1], valores[2], valores[3], valores[4], valores[5]);
                         alumnos.add(alumno);
                     } else {
                         getMessage("Error en el registro " + (i + 1) + " " + arre[i]);
@@ -147,5 +151,22 @@ public class NewGenerationActivity extends AppCompatActivity implements Invitado
     @Override
     public void getMessage(String message) {
         Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
+    }
+
+    private void  actualizarNumeroInvitaciones() {
+        String num = textInputLayout_NumeroInvitaciones.getEditText().getText().toString();
+        ProgressDialog dialog = ProgressDialog.show(NewGenerationActivity.this, "", "Configurando...", true);
+        if (!num.isEmpty()) {
+            try {
+                int n = Integer.parseInt(num);
+                new FirebaseConfiguration().updateCantidadInvitaciones(dialog, NewGenerationActivity.this, "invitaciones", n);
+            } catch (NumberFormatException e) {
+                textInputLayout_NumeroInvitaciones.setError("Se debe ingresar un número entero");
+                dialog.dismiss();
+            }
+        }else{
+            textInputLayout_NumeroInvitaciones.setError("Campo requerido");
+            dialog.dismiss();
+        }
     }
 }
