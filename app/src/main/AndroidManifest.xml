@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.graduationitsuscanqr">
+    package="com.tecnm_campus_uruapan.graduationitsuscanqr">
 
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -11,10 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GraduationITSUScanQR">
-        <activity android:name=".NewGenerationActivity"
+        <activity android:name="com.tecnm_campus_uruapan.graduationitsuscanqr.NewGenerationActivity"
             android:screenOrientation="portrait"
-            android:parentActivityName=".ManagementActivity"></activity>
-        <activity android:name=".SecurityActivity"
+            android:parentActivityName="com.tecnm_campus_uruapan.graduationitsuscanqr.ManagementActivity"></activity>
+        <activity android:name="com.tecnm_campus_uruapan.graduationitsuscanqr.SecurityActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,21 +22,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddAndUpdateActivity"
-            android:parentActivityName=".ManagementActivity"
+        <activity android:name="com.tecnm_campus_uruapan.graduationitsuscanqr.AddAndUpdateActivity"
+            android:parentActivityName="com.tecnm_campus_uruapan.graduationitsuscanqr.ManagementActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ManagementActivity"
+        <activity android:name="com.tecnm_campus_uruapan.graduationitsuscanqr.ManagementActivity"
             android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".SplashActivity"
+            android:parentActivityName="com.tecnm_campus_uruapan.graduationitsuscanqr.MainActivity"/>
+        <activity android:name="com.tecnm_campus_uruapan.graduationitsuscanqr.SplashActivity"
             android:screenOrientation="portrait">
 
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.tecnm_campus_uruapan.graduationitsuscanqr.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".helpers.CaptureActivityPortrait"
+            android:name="com.tecnm_campus_uruapan.graduationitsuscanqr.helpers.CaptureActivityPortrait"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             android:theme="@style/zxing_CaptureTheme"

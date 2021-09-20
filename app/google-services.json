@@ -8,18 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:881597366214:android:c0c9d00f2f431a0b703cc7",
+        "mobilesdk_app_id": "1:881597366214:android:1f5129e2fe56ccd8703cc7",
         "android_client_info": {
-          "package_name": "com.example.graduationitsuscanqr"
+          "package_name": "com.salvador_tecnm_uruapan.graduationitsucreateqrs"
         }
       },
       "oauth_client": [
         {
-          "client_id": "881597366214-n25ra7q19sjea4f0t1j78rlsj5h84tp1.apps.googleusercontent.com",
+          "client_id": "881597366214-b1tr8ejjjin7eon7npm9ro13malgped3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.graduationitsuscanqr",
-            "certificate_hash": "39af6a0cb19be32008677733dce052d3da2f1f24"
+            "package_name": "com.salvador_tecnm_uruapan.graduationitsucreateqrs",
+            "certificate_hash": "febcc84c8840eb6432b92a5b6bcf0e170394c041"
           }
         },
         {
@@ -45,18 +45,18 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:881597366214:android:fe1842df309e02ae703cc7",
+        "mobilesdk_app_id": "1:881597366214:android:3a179b8a719a36b1703cc7",
         "android_client_info": {
-          "package_name": "com.salvador.graduationitsucreateqrs"
+          "package_name": "com.tecnm_campus_uruapan.graduationitsuscanqr"
         }
       },
       "oauth_client": [
         {
-          "client_id": "881597366214-t3vtn2qcd66unhqljrvobb49t5hnk44f.apps.googleusercontent.com",
+          "client_id": "881597366214-j0b1e4j4svtssen1gq2hjdcrvba7bbp5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.salvador.graduationitsucreateqrs",
-            "certificate_hash": "39af6a0cb19be32008677733dce052d3da2f1f24"
+            "package_name": "com.tecnm_campus_uruapan.graduationitsuscanqr",
+            "certificate_hash": "3579de07768917eaa9c85d28c5ee57fc583416b6"
           }
         },
         {
