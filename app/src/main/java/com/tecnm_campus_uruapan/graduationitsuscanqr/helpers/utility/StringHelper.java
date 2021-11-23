@@ -5,6 +5,7 @@ package com.tecnm_campus_uruapan.graduationitsuscanqr.helpers.utility;
 import java.util.regex.Pattern;
 
 public class StringHelper {
+
     private final static String EXREGEMAIL="([a-z,0-9]+((\\.|_|-)[a-z0-9]+)*)@([a-z,0-9]+(\\.[a-z0-9]+)*)\\.([a-z]{2,})(\\.([a-z]{2}))?";
     public final static  String REGX = "(\\\"\\d{8}\\\",\\\"[A-Z,0-9]+\\\",\\\"[A-Z,\\s,Ñ]+\\\",\\\"\\d{1}\\\",\\\"[A,B,U,P]\\\",\\\"([A-Z,0-9]+((\\.|_|-)[A-Z0-9]+)*)@([A-Z,0-9]+(\\.[A-Z0-9]+)*)\\.([A-Z]{2,})(\\.([A-Z]{2}))?\\\",)";
     //public final static String CARRERAS[] = {"ING. EN SISTEMAS COMPUTACIONALES", "ING. ADMINISTRACION","ING. ELECTRONICA","ING. CIVIL", "ING. MECATRONICA","ING. MECANICA","ING. INDUSTRIAL", "ING. EN INDUSTRIAS ALIMENTARIAS"};
